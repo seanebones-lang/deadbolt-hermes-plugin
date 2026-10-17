@@ -1,0 +1,28 @@
+name: deadbolt
+version: "0.1.0"
+description: "Create reviewed text artifacts through DeadBolt exact-action approval. Protects only this plugin's commit tool; not whole-agent containment."
+author: NextEleven
+license: Apache-2.0
+homepage: https://github.com/seanebones-lang/deadbolt-hermes-plugin
+tags: [approval, provenance, security, artifacts]
+requires_hermes: ">=0.22.2"
+provides_tools:
+  - deadbolt_prepare_write
+  - deadbolt_commit_write
+config_schema:
+  workspace:
+    type: str
+    default: ""
+    description: "Operator-selected existing absolute directory for new text artifacts."
+  run_id:
+    type: str
+    default: ""
+    description: "Existing operator-provisioned DeadBolt run, bound to the admission credential."
+  sidecar_port:
+    type: int
+    default: 9782
+    description: "DeadBolt 2.0.0 loopback TCP port (127.0.0.1 only)."
+  admission_token:
+    type: secret
+    env: DEADBOLT_HERMES_ADMISSION_TOKEN
+    description: "Scoped admission credential for this run; never the operator token."

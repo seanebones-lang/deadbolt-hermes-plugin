@@ -1,0 +1,49 @@
+name: plugin acceptance
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: plugin
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: NousResearch/hermes-agent
+          ref: d923a5eb487a17c0a68801bba9ef0f56c81040a8 # v0.22.2
+          path: hermes
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: seanebones-lang/deadbolt
+          ref: 14804f2d512ce814a11de80daa8ca858b1dc7598 # v2.0.0
+          path: engine
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable installer
+        with:
+          toolchain: "1.95.0"
+      - name: Build the pinned engine from official source
+        working-directory: engine
+        run: cargo build --locked --bin deadbolt
+      - name: Unit, catalog validation, and actual framework dispatch
+        working-directory: hermes
+        env:
+          HERMES_HOME: ${{ runner.temp }}/deadbolt-hermes-qa
+          HERMES_RUNTIME_DIR: ${{ runner.temp }}/deadbolt-hermes-qa/tools
+        run: |
+          bash scripts/run-in-hermes-env python -m unittest discover -s ../plugin/tests -v
+          bash scripts/run-in-hermes-env python -m hermes_cli.main plugins validate ../plugin --install-deps
+          bash scripts/run-in-hermes-env python ../plugin/tests/acceptance.py --hermes . --binary ../engine/target/debug/deadbolt > ../acceptance.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: acceptance-${{ matrix.os }}
+          path: acceptance.json
+          if-no-files-found: error

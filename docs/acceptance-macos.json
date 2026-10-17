@@ -1,0 +1,92 @@
+{
+  "hermes_revision": "d923a5eb487a17c0a68801bba9ef0f56c81040a8",
+  "hermes_release": "v0.22.2",
+  "deadbolt_version": "deadbolt 2.0.0",
+  "deadbolt_sha256": "741f7f60966b56c7ce1f3d2268778c6bdb69f0ece23c6992980dc3708d134fd1",
+  "cases": [
+    {
+      "case": "prepare_does_not_write",
+      "output_created": false
+    },
+    {
+      "case": "no_operator_approval",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "changed_path_after_review",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "changed_content_after_review",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "exact_reviewed_write",
+      "admitted": true,
+      "output_created": true
+    },
+    {
+      "case": "one_use_replay",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "sidecar_outage",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "operator_restart_preserves_pending_grant",
+      "admitted": true,
+      "output_created": true
+    },
+    {
+      "case": "missing_profile_admission_secret",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "invalid_admission_credential",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "concurrent_commit_consumes_once",
+      "completed_writes": 1
+    },
+    {
+      "case": "expired_exact_action",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "exclusive_create_refuses_overwrite",
+      "admitted": true,
+      "output_created": false
+    },
+    {
+      "case": "symlink_parent_refused",
+      "output_created": false
+    },
+    {
+      "case": "kill_blocks_already_approved_write",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "ensure_does_not_resurrect_killed_run",
+      "admitted": false,
+      "output_created": false
+    }
+  ],
+  "model_calls": 0,
+  "scope": "Real Hermes discovery and handle_function_call dispatch; no model conversation or whole-agent containment",
+  "host": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "checked_at": "2026-10-17T03:30:16.762429+00:00"
+}
