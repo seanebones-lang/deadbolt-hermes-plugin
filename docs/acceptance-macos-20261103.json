@@ -1,0 +1,88 @@
+{
+  "hermes_revision": "6112c2adb9e11f69734a29be9d2696f345ffa06a",
+  "hermes_release": "0.22.6+404",
+  "python_version": "3.14.9",
+  "deadbolt_version": "deadbolt 2.0.1",
+  "deadbolt_sha256": "a1c2942f5b5c2fad57dba6534633f52602dc2fbaae5f327a7456f1348143a688",
+  "cases": [
+    {
+      "case": "prepare_does_not_write",
+      "output_created": false
+    },
+    {
+      "case": "no_operator_approval",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "changed_path_after_review",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "changed_content_after_review",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "exact_reviewed_write",
+      "admitted": true,
+      "output_created": true
+    },
+    {
+      "case": "one_use_replay",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "sidecar_outage",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "operator_restart_preserves_pending_grant",
+      "admitted": true,
+      "output_created": true
+    },
+    {
+      "case": "missing_profile_admission_secret",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "invalid_admission_credential",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "concurrent_commit_consumes_once",
+      "completed_writes": 1
+    },
+    {
+      "case": "expired_exact_action",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "exclusive_create_refuses_overwrite",
+      "admitted": true,
+      "output_created": false
+    },
+    {
+      "case": "symlink_parent_refused",
+      "output_created": false
+    },
+    {
+      "case": "kill_blocks_already_approved_write",
+      "admitted": false,
+      "output_created": false
+    },
+    {
+      "case": "ensure_does_not_resurrect_killed_run",
+      "admitted": false,
+      "output_created": false
+    }
+  ],
+  "model_calls": 0,
+  "scope": "Real Hermes discovery and handle_function_call dispatch; no model conversation or whole-agent containment"
+}
