@@ -9,6 +9,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import platform
 import re
 import secrets
 import shutil
@@ -39,6 +40,7 @@ def acceptance(hermes, binary, work):
     from agent.secret_scope import set_secret_scope, reset_secret_scope
     from hermes_cli.plugins import discover_plugins
     from model_tools import handle_function_call
+    from hermes_cli.version_info import get_version_info
 
     discover_plugins(force=True)
     env = {k: v for k, v in os.environ.items() if not k.startswith("DEADBOLT_")}
@@ -193,7 +195,9 @@ def acceptance(hermes, binary, work):
         incident = json.loads(operator("incident", "--agent", "hermes-qa", "--json"))
         assert incident
         return {"hermes_revision": subprocess.check_output(["git", "-C", str(hermes), "rev-parse", "HEAD"], text=True).strip(),
-                "hermes_release": "v0.22.2", "deadbolt_version": operator("--version").strip(),
+                "hermes_release": get_version_info().display_version,
+                "python_version": platform.python_version(),
+                "deadbolt_version": operator("--version").strip(),
                 "deadbolt_sha256": hashlib.sha256(binary.read_bytes()).hexdigest(),
                 "cases": cases, "model_calls": 0, "scope": "Real Hermes discovery and handle_function_call dispatch; no model conversation or whole-agent containment"}
     finally:

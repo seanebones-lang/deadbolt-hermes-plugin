@@ -18,13 +18,13 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: NousResearch/hermes-agent
-          ref: d923a5eb487a17c0a68801bba9ef0f56c81040a8 # v0.22.2
+          ref: 6112c2adb9e11f69734a29be9d2696f345ffa06a # tested 0.22.6+404 source
           path: hermes
           persist-credentials: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: seanebones-lang/deadbolt
-          ref: 14804f2d512ce814a11de80daa8ca858b1dc7598 # v2.0.0
+          ref: e87519f700be03c27a564ed274907649224d256f # v2.0.1
           path: engine
           persist-credentials: false
       - uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable installer

@@ -1,5 +1,5 @@
 name: deadbolt
-version: "0.1.0"
+version: "0.1.1"
 description: "Create reviewed text artifacts through DeadBolt exact-action approval. Protects only this plugin's commit tool; not whole-agent containment."
 author: NextEleven
 license: Apache-2.0
@@ -21,7 +21,7 @@ config_schema:
   sidecar_port:
     type: int
     default: 9782
-    description: "DeadBolt 2.0.0 loopback TCP port (127.0.0.1 only)."
+    description: "DeadBolt 2.0.1 loopback TCP port (127.0.0.1 only)."
   admission_token:
     type: secret
     env: DEADBOLT_HERMES_ADMISSION_TOKEN

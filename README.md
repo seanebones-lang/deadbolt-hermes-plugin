@@ -6,7 +6,7 @@ This standalone Hermes plugin provides two tools:
 
 * `deadbolt_prepare_write` saves a private review request containing the exact
   destination and UTF-8 content. It does not create the destination or approve it.
-* `deadbolt_commit_write` asks a separately running DeadBolt 2.0.0 sidecar for
+* `deadbolt_commit_write` asks a separately running DeadBolt 2.0.1 sidecar for
   exact-action admission, then creates that new file. A denial does not run the
   write. The grant binds run, tool, workspace, path, content, nonce and deadline;
   it is consumed once.
@@ -38,7 +38,8 @@ filesystem transaction is claimed.
 ## Install
 
 Requires Hermes **0.22.2 or later**, a supported POSIX host (macOS/Linux), and a
-separately installed **DeadBolt 2.0.0** engine. The plugin is Python source using
+separately installed **DeadBolt 2.0.1** engine. Plugin **0.1.1** and engine **2.0.1**
+are separate versions. The plugin is Python source using
 only the standard library. It bundles no executable, downloads nothing at startup,
 does not start the sidecar and does not modify Hermes core.
 
@@ -51,14 +52,19 @@ This is a direct repository install, **not a claim of Nous catalog approval**.
 Inspect and pin a reviewed commit for your environment. The catalog submission,
 if accepted, pins the reviewed source separately.
 
-Install the engine from its [official release and verification instructions](https://github.com/seanebones-lang/deadbolt/blob/v2.0.0/docs/INSTALL.md).
-The plugin does not install or upgrade it for you.
+Install the engine from its [current installation guide](https://github.com/seanebones-lang/deadbolt/blob/main/docs/INSTALL.md)
+and verify `deadbolt --version` reports **2.0.1** in the operator environment that
+starts the sidecar. The plugin does not install or upgrade the engine for you.
+Back up operator state before upgrading. Refresh an existing repository install
+to a reviewed plugin commit and start a new Hermes session; copying source alone
+does not establish which plugin the session loaded. See the pinned framework and
+engine revisions in [the validation record](docs/VALIDATION.md).
 
 ## Operator setup — outside the agent
 
 1. Select a fresh existing output directory and a unique run ID. Set up private
    `DEADBOLT_DB` and `DEADBOLT_EVENTS` paths and a private `DEADBOLT_TOKEN` in the
-   **operator/sidecar process only**, following the [official authentication guide](https://github.com/seanebones-lang/deadbolt/blob/v2.0.0/docs/HTTP-AUTHENTICATION.md).
+   **operator/sidecar process only**, following the [official authentication guide](https://github.com/seanebones-lang/deadbolt/blob/main/docs/HTTP-AUTHENTICATION.md).
    Never put the operator token into Hermes.
 2. Provision a finite run, explicit policy and scoped admission credential:
 
@@ -74,7 +80,7 @@ The plugin does not install or upgrade it for you.
    Use a private existing parent directory for the new credential file. Issuance
    never overwrites it or prints its secret. This finite setup expires after one
    hour; admissions do not renew it. For ongoing jobs use a separately trusted
-   [supervisor](https://github.com/seanebones-lang/deadbolt/blob/v2.0.0/docs/SUPERVISION.md).
+   [supervisor](https://github.com/seanebones-lang/deadbolt/blob/main/docs/SUPERVISION.md).
    Reconnection must not automatically create a fresh run or revive a killed ID.
 3. In Hermes Desktop → Plugins → DeadBolt settings, set `workspace` to the
    existing absolute output directory, `run_id` to `hermes-report-001`, and
@@ -122,6 +128,9 @@ The plugin does not install or upgrade it for you.
 * Only outbound connection: bounded HTTP to literal `127.0.0.1` at the configured
   port, endpoint `/admit-action`, using a single-run admission credential.
   No redirects, remote service, telemetry or paid provider calls.
+  Use this route only on a trusted private host with the sidecar's port controlled
+  by the operator. Loopback restriction is not peer authentication or an OS
+  isolation boundary.
 * Reads/writes private pending requests containing raw proposed text in the active
   profile's plugin data. They persist after completion/expiry for operator review.
   Review and remove old request files using your normal private-file workflow;

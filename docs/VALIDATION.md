@@ -1,6 +1,37 @@
 # Validation record
 
-Local acceptance on macOS arm64 used:
+## Current compatibility check — November 3, 2026
+
+Plugin 0.1.1 was tested on macOS arm64 through real Hermes discovery and
+`model_tools.handle_function_call` dispatch using the existing PM-managed runtime:
+
+* Hermes commit `6112c2adb9e11f69734a29be9d2696f345ffa06a`, reporting `0.22.6+404`.
+* Published DeadBolt **2.0.1** native executable, SHA-256
+  `a1c2942f5b5c2fad57dba6534633f52602dc2fbaae5f327a7456f1348143a688`.
+* Python **3.14.9**. No environment installation, model call or owner profile change.
+
+All 16 framework/process scenarios listed below and all four unit tests passed.
+The actual framework's catalog validator also passed all 15 checks with no
+warnings, using subprocess-isolated registration and no dependency installation.
+The [dated machine-readable receipt](acceptance-macos-20261103.json) records actual
+runtime versions; the test no longer hardcodes the Hermes release name. The
+installed Hermes checkout had pre-existing changes to five JavaScript/package
+manifests; those were not edited or exercised by this Python dispatch test.
+The receipt's Git revision identifies its committed source baseline, not a claim
+of a clean installed checkout.
+
+CI now pins that Hermes revision and official DeadBolt 2.0.1 source
+`e87519f700be03c27a564ed274907649224d256f`. A configured job is not a passing result.
+Linux and clean-checkout CI outcomes remain separate from this Mac result.
+
+This test uses a trusted private host and an operator-started sidecar. Loopback
+restriction is not peer authentication or OS isolation. See README's access
+disclosure. No model-mediated or whole-agent protection claim follows from these
+checks.
+
+## Historical initial acceptance — DeadBolt 2.0.0
+
+The original local acceptance on macOS arm64 used:
 
 * Hermes v0.22.2, commit `d923a5eb487a17c0a68801bba9ef0f56c81040a8`.
 * DeadBolt 2.0.0 official installed executable, SHA-256
@@ -39,10 +70,9 @@ configuration/extra arguments. The catalog validator passed its manifest,
 configuration, isolated registration, declared tools/hooks/middleware, collision,
 dependency, security-scan and no-core-override checks.
 
-[Machine-readable macOS receipt](acceptance-macos.json). CI repeats unit checks,
-catalog validation and real acceptance on macOS and Linux, building DeadBolt from
-the pinned official v2.0.0 source. A configured CI job is not a passing result;
-consult the actual run for the submitted commit.
+[Original machine-readable macOS receipt](acceptance-macos.json), retained as
+version-specific history. Current CI pins are stated above; consult the actual
+run for the submitted commit.
 
 ## What this does not establish
 
