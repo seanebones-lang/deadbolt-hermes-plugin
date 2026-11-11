@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: seanebones-lang/deadbolt
-          ref: e87519f700be03c27a564ed274907649224d256f # v2.0.1
+          ref: 7d130e882d03b9ba82556fb072f646d4191bbe8a # v2.0.2
           path: engine
           persist-credentials: false
       - uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable installer
