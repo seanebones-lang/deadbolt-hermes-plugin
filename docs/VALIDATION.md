@@ -1,6 +1,16 @@
 # Validation record
 
-## Current compatibility check — November 3, 2026
+## 2.0.2 compatibility candidate
+
+Plugin 0.1.2 changes the recommended/tested sidecar baseline to the published
+2.0.2 SQLite security update. It bundles no engine and changes no tool behavior.
+CI pins engine source `7d130e882d03b9ba82556fb072f646d4191bbe8a` against the
+unchanged Hermes framework pin. Its actual macOS/Linux results are a release
+gate; the earlier Mac receipt below proves only its dated 2.0.1 scope.
+Update the separately installed sidecar and verify its actual version.
+
+
+## Historical compatibility check — November 3, 2026
 
 Plugin 0.1.1 was tested on macOS arm64 through real Hermes discovery and
 `model_tools.handle_function_call` dispatch using the existing PM-managed runtime:

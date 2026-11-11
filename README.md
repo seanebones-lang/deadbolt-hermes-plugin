@@ -6,7 +6,7 @@ This standalone Hermes plugin provides two tools:
 
 * `deadbolt_prepare_write` saves a private review request containing the exact
   destination and UTF-8 content. It does not create the destination or approve it.
-* `deadbolt_commit_write` asks a separately running DeadBolt 2.0.1 sidecar for
+* `deadbolt_commit_write` asks a separately running DeadBolt 2.0.2 sidecar for
   exact-action admission, then creates that new file. A denial does not run the
   write. The grant binds run, tool, workspace, path, content, nonce and deadline;
   it is consumed once.
@@ -38,7 +38,7 @@ filesystem transaction is claimed.
 ## Install
 
 Requires Hermes **0.22.2 or later**, a supported POSIX host (macOS/Linux), and a
-separately installed **DeadBolt 2.0.1** engine. Plugin **0.1.1** and engine **2.0.1**
+separately installed **DeadBolt 2.0.2** engine. Plugin **0.1.2** and engine **2.0.2**
 are separate versions. The plugin is Python source using
 only the standard library. It bundles no executable, downloads nothing at startup,
 does not start the sidecar and does not modify Hermes core.
@@ -53,7 +53,7 @@ Inspect and pin a reviewed commit for your environment. The catalog submission,
 if accepted, pins the reviewed source separately.
 
 Install the engine from its [current installation guide](https://github.com/seanebones-lang/deadbolt/blob/main/docs/INSTALL.md)
-and verify `deadbolt --version` reports **2.0.1** in the operator environment that
+and verify `deadbolt --version` reports **2.0.2** in the operator environment that
 starts the sidecar. The plugin does not install or upgrade the engine for you.
 Back up operator state before upgrading. Refresh an existing repository install
 to a reviewed plugin commit and start a new Hermes session; copying source alone
