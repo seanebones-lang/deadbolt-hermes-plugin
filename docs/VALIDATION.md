@@ -1,13 +1,21 @@
 # Validation record
 
-## 2.0.2 compatibility candidate
+## Current compatibility — DeadBolt 2.0.2
 
 Plugin 0.1.2 changes the recommended/tested sidecar baseline to the published
 2.0.2 SQLite security update. It bundles no engine and changes no tool behavior.
-CI pins engine source `7d130e882d03b9ba82556fb072f646d4191bbe8a` against the
-unchanged Hermes framework pin. Its actual macOS/Linux results are a release
-gate; the earlier Mac receipt below proves only its dated 2.0.1 scope.
-Update the separately installed sidecar and verify its actual version.
+The [November 11 CI run](https://github.com/seanebones-lang/deadbolt-hermes-plugin/actions/runs/42997180630)
+at plugin revision `1d27233ea75cce945b1983cda39f89cac8168b26` completed
+successfully on [Ubuntu](https://github.com/seanebones-lang/deadbolt-hermes-plugin/actions/runs/42997180630/job/130444069141)
+and [macOS](https://github.com/seanebones-lang/deadbolt-hermes-plugin/actions/runs/42997180630/job/130444069474).
+That workflow pins engine source `7d130e882d03b9ba82556fb072f646d4191bbe8a`
+and Hermes framework revision `6112c2adb9e11f69734a29be9d2696f345ffa06a`.
+It runs unit tests, catalog validation and actual framework dispatch with
+disposable profiles and fictional data; it does not run a model conversation.
+
+The earlier Mac receipt below retains its dated 2.0.1 scope. These results do
+not show that an existing user's sidecar has updated: update the separately
+installed engine and verify its actual version.
 
 
 ## Historical compatibility check — November 3, 2026
@@ -30,7 +38,7 @@ manifests; those were not edited or exercised by this Python dispatch test.
 The receipt's Git revision identifies its committed source baseline, not a claim
 of a clean installed checkout.
 
-CI now pins that Hermes revision and official DeadBolt 2.0.1 source
+At that time, CI pinned that Hermes revision and official DeadBolt 2.0.1 source
 `e87519f700be03c27a564ed274907649224d256f`. A configured job is not a passing result.
 Linux and clean-checkout CI outcomes remain separate from this Mac result.
 
